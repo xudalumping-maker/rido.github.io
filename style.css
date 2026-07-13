@@ -1,0 +1,498 @@
+/* ==========================================
+   1. GLOBAL VARIABLES & RESET
+========================================== */
+:root {
+    /* Tema Premium Dark-Glass */
+    --bg-mesh: radial-gradient(at 0% 0%, #1a1a2e 0%, transparent 50%), 
+               radial-gradient(at 100% 0%, #16213e 0%, transparent 50%), 
+               radial-gradient(at 100% 100%, #0f3460 0%, transparent 50%), 
+               radial-gradient(at 0% 100%, #000000 0%, transparent 50%);
+    --glass-bg: rgba(20, 25, 35, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-blur: blur(20px);
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-blue: #3b82f6;
+    --accent-green: #10b981;
+    --accent-red: #ef4444;
+    
+    --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    overflow: hidden;
+    background-color: #0f172a;
+    color: var(--text-primary);
+    user-select: none;
+}
+
+/* ==========================================
+   2. MAIN WORKSPACE & BACKGROUND
+========================================== */
+#workspace {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-mesh);
+    background-color: #0f172a;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================
+   3. TOP MENU BAR (MAC STYLE)
+========================================== */
+.top-bar {
+    height: 32px;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    font-size: 13px;
+    z-index: 9999;
+}
+
+.top-bar-left, .top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.brand-logo {
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, #60a5fa, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.fw-bold { font-weight: 600; }
+.menu-item { cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+.menu-item:hover { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
+.sys-icon { width: 14px; height: 14px; }
+
+/* ==========================================
+   4. DESKTOP GRID & ICONS
+========================================== */
+.desktop-grid {
+    flex-grow: 1;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    gap: 24px;
+    z-index: 10;
+}
+
+.desktop-item {
+    width: 84px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 8px;
+    transition: all 0.2s ease;
+}
+
+.desktop-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+}
+
+.item-icon svg {
+    width: 48px;
+    height: 48px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+    transition: transform 0.2s ease;
+}
+
+.desktop-item:hover .item-icon svg { transform: scale(1.1); }
+
+.item-label {
+    font-size: 12px;
+    text-align: center;
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* ==========================================
+   5. WIDGET SIDEBAR
+========================================== */
+.widget-sidebar {
+    position: absolute;
+    right: 24px;
+    top: 56px;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 5;
+}
+
+.widget-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--shadow-light);
+}
+
+.weather-widget { display: flex; justify-content: space-between; align-items: center; }
+.weather-info .city { font-size: 12px; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; }
+.weather-info .temp { font-size: 32px; font-weight: 300; margin: 4px 0; }
+.weather-info .condition { font-size: 13px; }
+.weather-icon { font-size: 40px; filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.4)); }
+
+.calendar-widget { padding: 16px; }
+.cal-header { font-weight: 600; margin-bottom: 12px; color: var(--accent-blue); }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; font-size: 12px; }
+.cal-grid span.fade { color: rgba(255, 255, 255, 0.2); }
+.active-day { background: var(--accent-blue); color: white; border-radius: 50%; font-weight: bold; width: 24px; height: 24px; line-height: 24px; margin: 0 auto; box-shadow: 0 0 10px var(--accent-blue); }
+
+/* ==========================================
+   6. UNIVERSAL WINDOW STYLING (GLASSMORPHISM)
+========================================== */
+.app-window {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-heavy);
+    display: none; /* Disembunyikan dulu, nanti JS yang buka */
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.app-window.active {
+    display: flex;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.window-top-bar {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.traffic-lights { display: flex; gap: 8px; }
+.light { width: 12px; height: 12px; border-radius: 50%; border: none; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+.light svg { width: 8px; height: 8px; opacity: 0; transition: 0.2s; }
+.traffic-lights:hover .light svg { opacity: 1; }
+.light.red { background: #ff5f56; }
+.light.yellow { background: #ffbd2e; }
+.light.green { background: #27c93f; }
+
+.window-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.window-body { flex-grow: 1; overflow: hidden; position: relative; }
+
+/* ==========================================
+   7. THEME: PORTFOLIO EXPLORER
+========================================== */
+#window-portfolio { width: 850px; height: 500px; }
+.search-bar { display: flex; align-items: center; background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--glass-border); }
+.search-bar svg { width: 14px; height: 14px; color: var(--text-secondary); }
+.search-bar input { background: transparent; border: none; color: white; margin-left: 8px; font-size: 12px; outline: none; width: 120px; }
+
+.layout-sidebar-main { display: flex; height: 100%; }
+.sidebar { width: 200px; background: rgba(0,0,0,0.2); border-right: 1px solid var(--glass-border); padding: 16px; }
+.sidebar-section h4 { font-size: 11px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 12px; letter-spacing: 1px; }
+.sidebar-section ul { list-style: none; }
+.sidebar-section li { padding: 6px 12px; font-size: 13px; cursor: pointer; border-radius: 6px; margin-bottom: 4px; transition: 0.2s; color: var(--text-secondary); }
+.sidebar-section li:hover, .sidebar-section li.active { background: rgba(255,255,255,0.1); color: white; }
+
+.main-content { flex-grow: 1; padding: 24px; overflow-y: auto; }
+.breadcrumb { font-size: 12px; color: var(--text-secondary); margin-bottom: 20px; }
+.file-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
+.file-card { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 8px; overflow: hidden; cursor: pointer; transition: 0.3s; }
+.file-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+.file-preview { height: 100px; display: flex; justify-content: center; align-items: center; font-size: 40px; }
+.bg-gradient-1 { background: linear-gradient(135deg, #6366f1, #a855f7); }
+.bg-gradient-2 { background: linear-gradient(135deg, #3b82f6, #2dd4bf); }
+.bg-gradient-3 { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+.file-details { padding: 12px; }
+.file-details h5 { font-size: 13px; margin-bottom: 4px; }
+.file-details p { font-size: 11px; color: var(--text-secondary); }
+
+/* ==========================================
+   8. THEME: CATATCUAN DASHBOARD
+========================================== */
+#window-catatcuan { width: 900px; height: 550px; background: rgba(15, 23, 42, 0.85); }
+.dashboard-layout { padding: 24px; overflow-y: auto; }
+.summary-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px; }
+.card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border); }
+.card-title { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+.card-amount { font-size: 24px; font-weight: 700; }
+.text-green { color: var(--accent-green); }
+.text-red { color: var(--accent-red); }
+
+.dashboard-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; }
+.box-panel { background: rgba(0,0,0,0.2); padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border); }
+.box-panel h3 { font-size: 15px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--glass-border); }
+
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+.form-group input { width: 100%; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); padding: 10px; border-radius: 6px; color: white; outline: none; transition: 0.2s; }
+.form-group input:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3); }
+
+.button-row { display: flex; gap: 10px; margin-top: 20px; }
+.btn { flex: 1; padding: 10px; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; color: white; }
+.btn-primary { background: var(--accent-blue); } .btn-primary:hover { background: #2563eb; }
+.btn-danger { background: var(--accent-red); } .btn-danger:hover { background: #dc2626; }
+
+.table-container { max-height: 250px; overflow-y: auto; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { text-align: left; padding: 10px; color: var(--text-secondary); border-bottom: 1px solid var(--glass-border); font-weight: 500; }
+.data-table td { padding: 12px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.empty-state td { text-align: center; padding: 30px !important; color: var(--text-secondary); font-style: italic; }
+
+/* ==========================================
+   9. THEME: PRICING / SERVICES
+========================================== */
+#window-services { width: 850px; height: 500px; }
+.pricing-header { text-align: center; padding: 30px 20px; }
+.pricing-header h2 { font-size: 24px; margin-bottom: 8px; }
+.pricing-header p { color: var(--text-secondary); font-size: 14px; }
+
+.pricing-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 0 30px 30px; }
+.pricing-card { background: rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-radius: 12px; padding: 24px; position: relative; display: flex; flex-direction: column; transition: 0.3s; }
+.pricing-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
+.pricing-card.popular { background: rgba(59, 130, 246, 0.1); border-color: var(--accent-blue); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2); }
+.popular-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent-blue); color: white; font-size: 10px; font-weight: bold; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; }
+
+.tier-name { font-size: 16px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; }
+.tier-price { font-size: 32px; font-weight: 800; margin-bottom: 10px; }
+.tier-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px; flex-grow: 1; }
+.feature-list { list-style: none; margin-bottom: 24px; }
+.feature-list li { font-size: 13px; margin-bottom: 10px; display: flex; gap: 8px; }
+.btn-outline { background: transparent; border: 1px solid var(--glass-border); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); }
+.btn-solid { background: var(--text-primary); color: #000; }
+.btn-solid:hover { background: #e2e8f0; }
+
+/* ==========================================
+   10. THEME: ABOUT ME (MODAL)
+========================================== */
+#window-about { width: 500px; height: auto; }
+.about-layout { display: flex; gap: 24px; padding: 30px; align-items: flex-start; }
+.profile-pic { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6, #8b5cf6); display: flex; justify-content: center; align-items: center; font-size: 24px; font-weight: 800; color: white; box-shadow: 0 10px 20px rgba(0,0,0,0.5); flex-shrink: 0; }
+.profile-text h1 { font-size: 22px; margin-bottom: 4px; }
+.profile-text h3 { font-size: 14px; color: var(--accent-blue); margin-bottom: 16px; }
+.profile-text p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
+.specs-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 24px; font-size: 12px; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 8px; }
+.specs-grid strong { color: white; }
+.contact-btn { width: 100%; padding: 12px; }
+
+/* ==========================================
+   11. BOTTOM MAC DOCK
+========================================== */
+.dock-wrapper { position: absolute; bottom: 16px; width: 100%; display: flex; justify-content: center; z-index: 9999; }
+.mac-dock { background: rgba(15, 23, 42, 0.6); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); padding: 8px 12px; border-radius: 24px; display: flex; gap: 12px; align-items: center; box-shadow: var(--shadow-heavy); transition: 0.3s; }
+.mac-dock:hover { background: rgba(30, 41, 59, 0.7); }
+.dock-item { position: relative; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+.dock-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; justify-content: center; align-items: center; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.dock-icon svg { width: 28px; height: 28px; }
+
+/* Efek Loncat Khas Mac OS */
+.dock-item:hover .dock-icon { transform: scale(1.4) translateY(-10px); background: rgba(255, 255, 255, 0.15); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+/* Titik indikator aplikasi kebuka (Opsional, diatur JS nanti) */
+.dock-item::after { content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: var(--text-primary); opacity: 0; transition: 0.2s; }
+.dock-item.running::after { opacity: 1; }
+
+.dock-tooltip { position: absolute; top: -45px; background: rgba(0,0,0,0.8); color: white; font-size: 12px; padding: 6px 12px; border-radius: 6px; opacity: 0; pointer-events: none; transition: 0.2s; white-space: nowrap; border: 1px solid var(--glass-border); }
+.dock-item:hover .dock-tooltip { opacity: 1; transform: translateY(-5px); }
+.dock-divider { width: 1px; height: 40px; background: var(--glass-border); margin: 0 4px; }
+
+/* ==========================================
+   12. RESPONSIVE MOBILE (ANTI-FREEZE)
+========================================== */
+@media (max-width: 768px) {
+    .hide-mobile { display: none; }
+    .widget-sidebar { display: none; } /* Hilangkan widget di HP biar luas */
+    .desktop-grid { gap: 16px; padding: 16px; }
+    
+    /* Paksa semua window jadi Full Screen di HP */
+    .app-window { width: 100% !important; height: 100% !important; top: 0 !important; left: 0 !important; transform: none !important; border-radius: 0; border: none; }
+    .app-window.active { transform: none !important; }
+    .window-top-bar { padding: 16px; border-radius: 0; }
+    
+    /* Perbaiki Layout Dalam Window di HP */
+    .layout-sidebar-main { flex-direction: column; }
+    .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--glass-border); display: flex; overflow-x: auto; padding: 10px; }
+    .sidebar-section ul { display: flex; gap: 10px; }
+    .sidebar-section h4 { display: none; }
+    
+    .dashboard-grid { grid-template-columns: 1fr; }
+    .summary-cards { grid-template-columns: 1fr; gap: 12px; }
+    .pricing-container { grid-template-columns: 1fr; padding: 16px; }
+    
+    .dock-wrapper { bottom: 8px; }
+    .dock-icon { width: 40px; height: 40px; }
+    .dock-item:hover .dock-icon { transform: scale(1.1) translateY(-5px); }
+}/* ==========================================
+   13. INTERAKTIVITAS & TOAST NOTIFICATION
+========================================== */
+.toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: var(--shadow-heavy);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Efek Maximize Window */
+.app-window.maximized {
+    width: 100vw !important;
+    height: calc(100vh - 32px) !important; /* Kurangi tinggi top-bar */
+    top: 32px !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: 0;
+    border: none;
+}
+/* ==========================================
+   14. CUSTOM CONTEXT MENU (RIGHT CLICK)
+========================================== */
+.glass-context {
+    position: absolute;
+    width: 200px;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    box-shadow: var(--shadow-heavy);
+    padding: 6px;
+    display: none; /* Sembunyiin default */
+    z-index: 99999;
+}
+
+.context-item {
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--text-primary);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.2s;
+    display: flex;
+    gap: 8px;
+}
+
+.context-item:hover {
+    background: var(--accent-blue);
+    color: white;
+}
+
+.context-divider {
+    height: 1px;
+    background: var(--glass-border);
+    margin: 4px 0;
+}
+/* ==========================================
+   15. GLOW UP PREMIUM (OVERRIDE)
+========================================== */
+/* 1. Ganti Font jadi 'Inter' (Font Wajib Startup/SaaS Mahal) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+:root {
+    /* 2. Perbaiki Background biar warnanya lebih 'Deep' dan Elegan */
+    --bg-mesh: radial-gradient(at 20% 20%, #1e1b4b 0%, transparent 60%), 
+               radial-gradient(at 80% 10%, #0f172a 0%, transparent 50%), 
+               radial-gradient(at 100% 100%, #172554 0%, transparent 50%), 
+               radial-gradient(at 0% 100%, #020617 0%, transparent 50%);
+               
+    /* 3. Bikin Kaca Beneran (Bening, BUKAN Butek) */
+    --glass-bg: rgba(255, 255, 255, 0.02); /* Kurangi putihnya biar warna background tembus */
+    --glass-border: rgba(255, 255, 255, 0.08); /* Border tipis aja */
+    --glass-blur: blur(30px); /* Blur digedein biar halus */
+    
+    /* 4. Rahasia Glassmorphism Mahal: Inset Shadow (Efek Cahaya di Tepi Atas Kaca) */
+    --shadow-heavy: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 
+                    inset 0 1px 0 0 rgba(255, 255, 255, 0.15); /* Ini kuncinya! */
+}
+
+#workspace {
+    background-color: #020617; /* Base warna lebih gelap dari sebelumnya */
+}
+
+/* 5. Animasi Window Bouncy ala Apple (Cubic-Bezier) */
+.app-window {
+    /* Ubah dari cuma transisi opacity jadi ada efek scale-up dari bawah */
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translate(-50%, -45%) scale(0.92); /* Posisi awal agak di bawah dan mengecil */
+    opacity: 0;
+}
+
+.app-window.active {
+    transform: translate(-50%, -50%) scale(1); /* Mumbul ke posisi normal */
+    opacity: 1;
+}
+
+/* Bikin Top Bar Window lebih nyatu sama body */
+.window-top-bar {
+    background: transparent; /* Ilangin warna kaku di top bar */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Bersihin tabel yang warnanya balapan sama background */
+.box-panel {
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
