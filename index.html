@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ridho Ardiansyah | Premium Workspace</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==========================================
+         0. SVG ICON LIBRARY (VECTOR MURNI ANTI PECAH)
+    =========================================== -->
+    <svg style="display: none;">
+        <defs>
+            <symbol id="icon-wifi" viewBox="0 0 24 24"><path fill="currentColor" d="M12 21c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm-4.6-4.6c2.5-2.5 6.6-2.5 9.2 0l1.4-1.4c-3.3-3.3-8.7-3.3-12 0l1.4 1.4zm-4.2-4.2c4.8-4.8 12.7-4.8 17.6 0l1.4-1.4c-5.6-5.6-14.8-5.6-20.4 0l1.4 1.4z"/></symbol>
+            <symbol id="icon-battery" viewBox="0 0 24 24"><path fill="currentColor" d="M17 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H3V8h14v8zM21 9h2v6h-2zM5 10h10v4H5z"/></symbol>
+            <symbol id="icon-search" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
+            <symbol id="icon-folder" viewBox="0 0 24 24"><path fill="#81c0fa" d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></symbol>
+            <symbol id="icon-chart" viewBox="0 0 24 24"><path fill="#34d399" d="M3 3v18h18V3H3zm16 16H5V5h14v14zM7 10h2v7H7zm4-5h2v12h-2zm4 3h2v9h-2z"/></symbol>
+            <symbol id="icon-briefcase" viewBox="0 0 24 24"><path fill="#fbbf24" d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></symbol>
+            <symbol id="icon-user" viewBox="0 0 24 24"><path fill="#a78bfa" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></symbol>
+            <symbol id="icon-close" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+        </defs>
+    </svg>
+
+    <!-- ==========================================
+         1. MAIN WORKSPACE (BACKGROUND & LAYOUT)
+    =========================================== -->
+    <div id="workspace">
+        
+        <!-- TOP MENU BAR (Gaya macOS) -->
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <span class="brand-logo">R/A</span>
+                <span class="menu-item fw-bold">Ridho OS</span>
+                <span class="menu-item hide-mobile">File</span>
+                <span class="menu-item hide-mobile">View</span>
+                <span class="menu-item hide-mobile">Help</span>
+            </div>
+            <div class="top-bar-right">
+                <span class="menu-item"><svg class="sys-icon"><use href="#icon-wifi"></use></svg></span>
+                <span class="menu-item"><svg class="sys-icon"><use href="#icon-battery"></use></svg> 100%</span>
+                <span class="menu-item time-display" id="top-clock">Sen, 13 Jul 16:38</span>
+            </div>
+        </header>
+
+        <!-- WIDGET PANEL (Samping Kanan) -->
+        <div class="widget-sidebar">
+            <div class="widget-card weather-widget">
+                <div class="weather-info">
+                    <h3 class="city">Mejayan, ID</h3>
+                    <h1 class="temp">28°C</h1>
+                    <p class="condition">Cerah Berawan</p>
+                </div>
+                <div class="weather-icon">☀️</div>
+            </div>
+            
+            <div class="widget-card calendar-widget">
+                <div class="cal-header">Juli 2026</div>
+                <div class="cal-grid">
+                    <span>S</span><span>S</span><span>R</span><span>K</span><span>J</span><span>S</span><span>M</span>
+                    <!-- Baris Tanggal (Placeholder statis buat struktur) -->
+                    <span class="fade">29</span><span class="fade">30</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                    <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+                    <span class="active-day">13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- AREA DESKTOP & IKON -->
+        <main class="desktop-grid" id="desktop">
+            <div class="desktop-item interactive" data-window="window-portfolio">
+                <div class="item-icon"><svg><use href="#icon-folder"></use></svg></div>
+                <span class="item-label">My Portfolio</span>
+            </div>
+            <div class="desktop-item interactive" data-window="window-services">
+                <div class="item-icon"><svg><use href="#icon-briefcase"></use></svg></div>
+                <span class="item-label">Services.pdf</span>
+            </div>
+            <div class="desktop-item interactive" data-window="window-catatcuan">
+                <div class="item-icon"><svg><use href="#icon-chart"></use></svg></div>
+                <span class="item-label">CatatCuan App</span>
+            </div>
+            <div class="desktop-item interactive" data-window="window-about">
+                <div class="item-icon"><svg><use href="#icon-user"></use></svg></div>
+                <span class="item-label">Profile.md</span>
+            </div>
+        </main>
+
+        <!-- ==========================================
+             2. WINDOW APLIKASI: PORTFOLIO (FILE EXPLORER)
+        =========================================== -->
+        <div id="window-portfolio" class="app-window explorer-theme">
+            <div class="window-top-bar interactive-header">
+                <div class="traffic-lights">
+                    <button class="light red close-btn"><svg><use href="#icon-close"></use></svg></button>
+                    <button class="light yellow minimize-btn"></button>
+                    <button class="light green maximize-btn"></button>
+                </div>
+                <div class="window-title">📁 Portfolio - Ridho Ardiansyah</div>
+                <div class="window-actions">
+                    <div class="search-bar">
+                        <svg><use href="#icon-search"></use></svg>
+                        <input type="text" placeholder="Search projects...">
+                    </div>
+                </div>
+            </div>
+            <div class="window-body layout-sidebar-main">
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h4>Favorites</h4>
+                        <ul>
+                            <li class="active">🌟 Featured</li>
+                            <li>💻 Web Apps</li>
+                            <li>📱 UI/UX Design</li>
+                            <li>🗑️ Trash</li>
+                        </ul>
+                    </div>
+                </aside>
+                <section class="main-content">
+                    <div class="breadcrumb">Ridho > Portfolio > Featured</div>
+                    <div class="file-grid">
+                        <!-- Struktur Kartu Project -->
+                        <div class="file-card">
+                            <div class="file-preview bg-gradient-1">🚀</div>
+                            <div class="file-details">
+                                <h5>SaaS Dashboard</h5>
+                                <p>React, Tailwind</p>
+                            </div>
+                        </div>
+                        <div class="file-card">
+                            <div class="file-preview bg-gradient-2">🛍️</div>
+                            <div class="file-details">
+                                <h5>E-Commerce App</h5>
+                                <p>Node.js, MongoDB</p>
+                            </div>
+                        </div>
+                        <div class="file-card">
+                            <div class="file-preview bg-gradient-3">🏢</div>
+                            <div class="file-details">
+                                <h5>Company Profile</h5>
+                                <p>HTML, CSS, JS</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             3. WINDOW APLIKASI: CATATCUAN (DASHBOARD)
+        =========================================== -->
+        <div id="window-catatcuan" class="app-window dashboard-theme">
+            <div class="window-top-bar interactive-header">
+                <div class="traffic-lights">
+                    <button class="light red close-btn"><svg><use href="#icon-close"></use></svg></button>
+                    <button class="light yellow"></button>
+                    <button class="light green"></button>
+                </div>
+                <div class="window-title">CatatCuan Analytics</div>
+            </div>
+            <div class="window-body dashboard-layout">
+                
+                <!-- Dashboard Header Cards -->
+                <div class="summary-cards">
+                    <div class="card balance-card">
+                        <p class="card-title">Total Balance</p>
+                        <h2 class="card-amount">Rp <span id="display-balance">0</span></h2>
+                    </div>
+                    <div class="card income-card">
+                        <p class="card-title">Income</p>
+                        <h3 class="card-amount text-green">+ Rp <span id="display-income">0</span></h3>
+                    </div>
+                    <div class="card expense-card">
+                        <p class="card-title">Expenses</p>
+                        <h3 class="card-amount text-red">- Rp <span id="display-expense">0</span></h3>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Form Input -->
+                    <div class="action-panel box-panel">
+                        <h3>New Transaction</h3>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" id="input-desc" placeholder="e.g., Client Payment, Coffee">
+                        </div>
+                        <div class="form-group">
+                            <label>Amount (Rp)</label>
+                            <input type="number" id="input-amount" placeholder="0">
+                        </div>
+                        <div class="button-row">
+                            <button class="btn btn-primary" id="btn-add-income">Add Income</button>
+                            <button class="btn btn-danger" id="btn-add-expense">Add Expense</button>
+                        </div>
+                    </div>
+
+                    <!-- Table Riwayat Transaksi -->
+                    <div class="history-panel box-panel">
+                        <h3>Recent Transactions</h3>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Description</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transaction-list">
+                                    <!-- Struktur baris kosong (Nanti diisi JS) -->
+                                    <tr class="empty-state">
+                                        <td colspan="4">No transactions yet. Start adding!</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             4. WINDOW APLIKASI: SERVICES (PRICING TABLE)
+        =========================================== -->
+        <div id="window-services" class="app-window clean-theme">
+            <div class="window-top-bar interactive-header">
+                <div class="traffic-lights">
+                    <button class="light red close-btn"><svg><use href="#icon-close"></use></svg></button>
+                    <button class="light yellow"></button>
+                    <button class="light green"></button>
+                </div>
+                <div class="window-title">Pricelist & Services</div>
+            </div>
+            <div class="window-body">
+                <div class="pricing-header">
+                    <h2>Invest in Your Digital Presence</h2>
+                    <p>Transparent pricing, premium quality. Choose the perfect plan for your business.</p>
+                </div>
+                
+                <div class="pricing-container">
+                    <!-- Paket Basic -->
+                    <div class="pricing-card">
+                        <div class="tier-name">Starter</div>
+                        <div class="tier-price">Rp 1.5M</div>
+                        <p class="tier-desc">Perfect for small businesses or personal portfolios.</p>
+                        <ul class="feature-list">
+                            <li>✔️ 1-Page Landing Page</li>
+                            <li>✔️ Mobile Responsive</li>
+                            <li>✔️ SEO Basic</li>
+                            <li>❌ E-Commerce Features</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="alert('Link ke WA')">Choose Plan</button>
+                    </div>
+
+                    <!-- Paket Pro (Highlighted) -->
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <div class="tier-name">Professional</div>
+                        <div class="tier-price">Rp 3.5M</div>
+                        <p class="tier-desc">Ideal for growing brands that need more power.</p>
+                        <ul class="feature-list">
+                            <li>✔️ Up to 5 Pages</li>
+                            <li>✔️ Advanced Animations</li>
+                            <li>✔️ SEO Optimized</li>
+                            <li>✔️ CMS Integration</li>
+                        </ul>
+                        <button class="btn btn-solid" onclick="alert('Link ke WA')">Choose Plan</button>
+                    </div>
+
+                    <!-- Paket Enterprise -->
+                    <div class="pricing-card">
+                        <div class="tier-name">Enterprise</div>
+                        <div class="tier-price">Custom</div>
+                        <p class="tier-desc">Full-scale web applications tailored for your needs.</p>
+                        <ul class="feature-list">
+                            <li>✔️ Unlimited Pages</li>
+                            <li>✔️ Custom Dashboard/SaaS</li>
+                            <li>✔️ Database Integration</li>
+                            <li>✔️ Priority Support</li>
+                        </ul>
+                        <button class="btn btn-outline" onclick="alert('Link ke WA')">Contact Sales</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             5. WINDOW APLIKASI: ABOUT ME
+        =========================================== -->
+        <div id="window-about" class="app-window modal-theme">
+            <div class="window-top-bar interactive-header">
+                <div class="traffic-lights">
+                    <button class="light red close-btn"><svg><use href="#icon-close"></use></svg></button>
+                    <button class="light yellow"></button>
+                    <button class="light green"></button>
+                </div>
+                <div class="window-title">System Properties</div>
+            </div>
+            <div class="window-body about-layout">
+                <div class="profile-pic">R/A</div>
+                <div class="profile-text">
+                    <h1>Ridho Ardiansyah</h1>
+                    <h3>System Architect & Fullstack Developer</h3>
+                    <p>I build digital experiences that are elegant on the outside and robust on the inside. Specialized in modern web technologies, UI/UX, and scalable architectures.</p>
+                    <div class="specs-grid">
+                        <div class="spec-item"><strong>Processor:</strong> Coffee & Logic</div>
+                        <div class="spec-item"><strong>Memory:</strong> 99% Fast Learner</div>
+                        <div class="spec-item"><strong>Graphics:</strong> Pixel Perfect UI</div>
+                        <div class="spec-item"><strong>Storage:</strong> Unlimited Ideas</div>
+                    </div>
+                    <button class="btn btn-solid contact-btn" onclick="alert('Link WA/Email')">Let's Collaborate</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             6. BOTTOM DOCK (Gaya macOS)
+        =========================================== -->
+        <div class="dock-wrapper">
+            <div class="mac-dock">
+                <div class="dock-item interactive" data-window="window-portfolio">
+                    <div class="dock-icon"><svg><use href="#icon-folder"></use></svg></div>
+                    <span class="dock-tooltip">Portfolio</span>
+                </div>
+                <div class="dock-item interactive" data-window="window-services">
+                    <div class="dock-icon"><svg><use href="#icon-briefcase"></use></svg></div>
+                    <span class="dock-tooltip">Services</span>
+                </div>
+                <div class="dock-item interactive" data-window="window-catatcuan">
+                    <div class="dock-icon"><svg><use href="#icon-chart"></use></svg></div>
+                    <span class="dock-tooltip">CatatCuan</span>
+                </div>
+                <div class="dock-divider"></div>
+                <div class="dock-item interactive" data-window="window-about">
+                    <div class="dock-icon"><svg><use href="#icon-user"></use></svg></div>
+                    <span class="dock-tooltip">About Me</span>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- End of Workspace -->
+
+    <script src="script.js"></script>
+    <!-- CUSTOM RIGHT CLICK MENU -->
+<div id="context-menu" class="glass-context">
+    <div class="context-item" id="ctx-refresh">🔄 Refresh Desktop</div>
+    <div class="context-item" id="ctx-wallpaper">🖼️ Change Wallpaper</div>
+    <div class="context-divider"></div>
+    <div class="context-item" id="ctx-about">👤 About Developer</div>
+</div>
+</body>
+</html>
